@@ -1,63 +1,63 @@
 [gd_scene load_steps=27 format=3 uid="uid://wn5he8pu1kcf"]
 
 [ext_resource type="Script" uid="uid://dak0nhjqfgrtu" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://dtvm6ucveh71j" path="res://assets/sprites/Megaman 8 Run Spritesheet.png" id="2_dqkch"]
-[ext_resource type="Texture2D" uid="uid://dskech74jq3ss" path="res://assets/sprites/Megaman 8 Spritesheet.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bti363dnfsquf" path="res://assets/sprites/Megaman 8 Run Spritesheet.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://c8wpqgp73n1kk" path="res://assets/sprites/Megaman 8 Spritesheet.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://c1emqn6d7uou1" path="res://assets/sprites/Megaman 8 Start Run Spritesheet.png" id="3_qlg0r"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(0, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(41, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(82, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(123, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(164, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(205, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(246, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(287, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(328, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(369, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(410, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(451, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(492, 0, 41, 43)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
 atlas = ExtResource("2_dqkch")
 region = Rect2(533, 0, 41, 43)
 
@@ -77,6 +77,12 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tuyoq")
 }, {
@@ -112,12 +118,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qfm1y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fulsm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4r5pv")
 }],
 "loop": true,
 "name": &"run",
@@ -272,7 +272,8 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"start_run"
+animation = &"run"
+frame_progress = 0.750005
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
