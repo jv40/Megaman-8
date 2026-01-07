@@ -417,7 +417,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
-size = Vector2(18, 32)
+size = Vector2(18, 34)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
@@ -426,7 +426,7 @@ script = ExtResource("1_g2els")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"idle"
-frame_progress = 0.422649
+frame_progress = 0.0407329
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -443,5 +443,5 @@ region_enabled = true
 region_rect = Rect2(102, 117, 137, 41)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ur7pv")
