@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://di2v5p0ay0bf" path="res://assets/sprites/Megaman 8 Idle Spritesheet.png" id="3_fjrip"]
 [ext_resource type="Texture2D" uid="uid://c1emqn6d7uou1" path="res://assets/sprites/Megaman 8 Start Run Spritesheet.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dmbqucj4mp82b" path="res://assets/sprites/Megaman 8 Start Gun Run Spritesheet.png" id="4_fjrip"]
-[ext_resource type="Texture2D" uid="uid://og6acvqp85ja" path="res://assets/sprites/Megaman 8 Jump Spritesheet.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://cqq8xbt4wqlq1" path="res://assets/sprites/Megaman 8 Jump Spritesheet.png" id="4_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
 atlas = ExtResource("2_tuyoq")
@@ -353,7 +353,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2a3c5")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 20.0
 }, {
@@ -411,7 +411,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bj30b")
 }],
-"loop": true,
+"loop": false,
 "name": &"start_gun_run",
 "speed": 20.0
 }, {
@@ -565,7 +565,6 @@ script = ExtResource("1_g2els")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"jump"
-frame_progress = 0.374583
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
