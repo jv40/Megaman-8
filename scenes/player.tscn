@@ -426,7 +426,7 @@ script = ExtResource("1_g2els")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"idle"
-frame_progress = 0.0407329
+frame_progress = 0.592966
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
