@@ -38,9 +38,12 @@ func _physics_process(delta: float) -> void:
 			anim_sprite.play("idle")
 		elif direction != 0 and is_on_floor():
 			if is_shooting:
+				anim_sprite.offset.x = 4 * direction
 				shoot()
+				
 			else:
 			#anim_sprite.play("start_run")
+				anim_sprite.offset.x = 0
 				anim_sprite.play("run")
 	else:
 		anim_sprite.play("jump")
@@ -62,7 +65,6 @@ func shoot():
 	
 	#Switch animation
 	if anim_sprite.animation == "run":
-		#anim_sprite.offset.x = -5
 		anim_sprite.play("gun_run")
 		anim_sprite.frame = saved_frame
 		anim_sprite.frame_progress = saved_progress
