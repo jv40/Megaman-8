@@ -15,6 +15,11 @@ func _physics_process(delta: float) -> void:
 		anim_sprite.offset.y = -10
 		velocity.y = JUMP_VELOCITY
 	
+	if Input.is_action_just_released("jump") and not is_on_floor():
+		velocity.y = -20
+		velocity += get_gravity() * delta
+		
+	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 	
