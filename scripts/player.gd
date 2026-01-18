@@ -2,9 +2,11 @@ extends CharacterBody2D
 @onready var anim_sprite = $AnimatedSprite2D
 
 const SPEED = 300.0
+const SLIDE_SPEED = 500.0
 const JUMP_VELOCITY = -400.0
 var is_shooting = false
 var is_sliding = false
+var current_direction = 1;
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -24,8 +26,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 	
-	if Input.is_action_just_pressed("slide"):
-		slide()
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -35,63 +35,107 @@ func _physics_process(delta: float) -> void:
 	#direction == 1,0,-1 (0 for not moving)
 	if direction > 0:
 		anim_sprite.flip_h = false
+		current_direction = 1
 	elif direction < 0:
 		anim_sprite.flip_h = true
+		current_direction = -1
 		
+	if Input.is_action_just_pressed("slide") and is_on_floor():
+		slide()
 	
-	#Play Animation
-	if is_on_floor():
-		anim_sprite.offset.y = 0
-		
-		if direction == 0 :
-			anim_sprite.play("idle")
-			
-			
-		elif direction != 0 and is_on_floor():
-			if is_shooting:
-				anim_sprite.offset.x = 4 * direction
-				shoot()
-			
-			if is_sliding:
-				anim_sprite.play("slide")
-			
-			else:
-			#anim_sprite.play("start_run")
-				anim_sprite.offset.x = 0
-				anim_sprite.play("run")
-	else:
-		anim_sprite.play("jump")
-	
-	if direction:
+	#if is_sliding:
+		## Slide with extra speed in facing direction
+		#if direction == 0:
+			#velocity.x = SLIDE_SPEED
+			#velocity.x = move_toward(velocity.x, 0, SLIDE_SPEED)
+		#else:
+			#velocity.x = current_direction * SLIDE_SPEED
+	if is_sliding:
+		velocity.x = current_direction * SLIDE_SPEED  # Use facing_direction
+	elif direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+	update_animation(direction)
+
+func update_animation(direction):
+	var target_anim = ""
+	#current_direction = direction
+	
+	#Play Animation
+	if is_on_floor():
+		anim_sprite.offset.y = 0
+		
+		if is_sliding:
+			target_anim = "slide"
+			anim_sprite.offset.x = 0
+		
+		elif direction == 0 :
+			target_anim = "idle"
+			anim_sprite.offset.x = 0
+			
+		#elif direction != 0 and is_on_floor():
+			#if is_shooting:
+				#anim_sprite.offset.x = 4 * direction
+				#shoot()
+		else:
+			if is_shooting:
+				target_anim = "gun_run"
+				anim_sprite.offset.x = 4 * current_direction  # Gun offset
+			
+			else:
+				target_anim = "run"
+				anim_sprite.offset.x = 0
+			
+			#else:
+			##anim_sprite.play("start_run")
+				#anim_sprite.offset.x = 0
+				#anim_sprite.play("run")
+	else:
+		#anim_sprite.play("jump")
+		target_anim = "jump"
+		anim_sprite.offset.x = 0
+		
+	if anim_sprite.animation != target_anim:
+		var saved_frame = anim_sprite.frame
+		var saved_progress = anim_sprite.frame_progress
+		
+		anim_sprite.play(target_anim)
+		
+		# Preserve frame when switching between gun/normal versions
+		if ("gun_" in target_anim and "gun_" not in anim_sprite.animation) or \
+		("gun_" not in target_anim and "gun_" in anim_sprite.animation):
+			anim_sprite.frame = saved_frame
+			anim_sprite.frame_progress = saved_progress
 
 func slide():
 	is_sliding = true
+	velocity.x = current_direction * SLIDE_SPEED # set velocity immediately
 	await get_tree().create_timer(0.2).timeout
 	is_sliding = false
+	#velocity.x = move_toward(velocity.x, 0, SLIDE_SPEED)
 
 func shoot():
 	is_shooting = true
 	
 	#Get current frame before switching
-	var saved_frame = anim_sprite.frame
-	var saved_progress = anim_sprite.frame_progress
-	
-	#Switch animation
-	if anim_sprite.animation == "run":
-		anim_sprite.play("gun_run")
-		anim_sprite.frame = saved_frame
-		anim_sprite.frame_progress = saved_progress
+	#var saved_frame = anim_sprite.frame
+	#var saved_progress = anim_sprite.frame_progress
+	#
+	##Switch animation
+	#if anim_sprite.animation == "run":
+		#anim_sprite.play("gun_run")
+		#anim_sprite.frame = saved_frame
+		#anim_sprite.frame_progress = saved_progress
 	
 	#Fire bullet here
 	
 	
 	await get_tree().create_timer(0.2).timeout
-	saved_frame = anim_sprite.frame
-	saved_progress = anim_sprite.frame_progress
+	#saved_frame = anim_sprite.frame
+	#saved_progress = anim_sprite.frame_progress
 	is_shooting = false
 	#anim_sprite.offset.x = 0
