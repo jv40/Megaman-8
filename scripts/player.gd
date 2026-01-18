@@ -42,14 +42,7 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("slide") and is_on_floor():
 		slide()
-	
-	#if is_sliding:
-		## Slide with extra speed in facing direction
-		#if direction == 0:
-			#velocity.x = SLIDE_SPEED
-			#velocity.x = move_toward(velocity.x, 0, SLIDE_SPEED)
-		#else:
-			#velocity.x = current_direction * SLIDE_SPEED
+
 	if is_sliding:
 		velocity.x = current_direction * SLIDE_SPEED  # Use facing_direction
 	elif direction:
@@ -77,10 +70,6 @@ func update_animation(direction):
 			target_anim = "idle"
 			anim_sprite.offset.x = 0
 			
-		#elif direction != 0 and is_on_floor():
-			#if is_shooting:
-				#anim_sprite.offset.x = 4 * direction
-				#shoot()
 		else:
 			if is_shooting:
 				target_anim = "gun_run"
@@ -89,11 +78,7 @@ func update_animation(direction):
 			else:
 				target_anim = "run"
 				anim_sprite.offset.x = 0
-			
-			#else:
-			##anim_sprite.play("start_run")
-				#anim_sprite.offset.x = 0
-				#anim_sprite.play("run")
+				
 	else:
 		#anim_sprite.play("jump")
 		target_anim = "jump"
@@ -116,26 +101,8 @@ func slide():
 	velocity.x = current_direction * SLIDE_SPEED # set velocity immediately
 	await get_tree().create_timer(0.2).timeout
 	is_sliding = false
-	#velocity.x = move_toward(velocity.x, 0, SLIDE_SPEED)
 
 func shoot():
 	is_shooting = true
-	
-	#Get current frame before switching
-	#var saved_frame = anim_sprite.frame
-	#var saved_progress = anim_sprite.frame_progress
-	#
-	##Switch animation
-	#if anim_sprite.animation == "run":
-		#anim_sprite.play("gun_run")
-		#anim_sprite.frame = saved_frame
-		#anim_sprite.frame_progress = saved_progress
-	
-	#Fire bullet here
-	
-	
 	await get_tree().create_timer(0.2).timeout
-	#saved_frame = anim_sprite.frame
-	#saved_progress = anim_sprite.frame_progress
 	is_shooting = false
-	#anim_sprite.offset.x = 0
