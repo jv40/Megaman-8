@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://wn5he8pu1kcf"]
+[gd_scene load_steps=73 format=3 uid="uid://wn5he8pu1kcf"]
 
 [ext_resource type="Script" uid="uid://dak0nhjqfgrtu" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bti363dnfsquf" path="res://assets/sprites/Megaman 8 Run Spritesheet.png" id="2_dqkch"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c1emqn6d7uou1" path="res://assets/sprites/Megaman 8 Start Run Spritesheet.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dmbqucj4mp82b" path="res://assets/sprites/Megaman 8 Start Gun Run Spritesheet.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://cqq8xbt4wqlq1" path="res://assets/sprites/Megaman 8 Jump Spritesheet.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://oaau2wsfqfmg" path="res://assets/sprites/Megaman 8 Slide Spritesheet.png" id="6_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
 atlas = ExtResource("2_tuyoq")
@@ -213,6 +214,14 @@ region = Rect2(492, 0, 41, 43)
 atlas = ExtResource("2_dqkch")
 region = Rect2(533, 0, 41, 43)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_42b1b"]
+atlas = ExtResource("6_ur7pv")
+region = Rect2(0, 0, 52, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7ic4"]
+atlas = ExtResource("6_ur7pv")
+region = Rect2(52, 0, 52, 43)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
 atlas = ExtResource("4_fjrip")
 region = Rect2(0, 0, 43, 43)
@@ -406,6 +415,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_42b1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7ic4")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_md1ol")
 }, {
 "duration": 1.0,
@@ -564,7 +584,8 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"gun_run"
+animation = &"slide"
+frame_progress = 0.573472
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
